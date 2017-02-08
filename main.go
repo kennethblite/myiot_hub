@@ -10,18 +10,11 @@ import(
 )
 
 
-type Stats struct{
- temp string
- accelx string
- accely string
- accelz string
- humidity string
-}
 
 var userstream DataStream
 
 type DataStream struct{
-	s []Stats 
+	//s []Stats 
 	username string
 	dryer string
 }
