@@ -8,10 +8,12 @@ import(
 
 
 func TestSensorParsing(t *testing.T){
-	file, err := os.Open("test_data2.txt")
+	file, err := os.Open("large.txt")
+	Buffer := NewRotateBuffer(10)
 	if (err != nil){
 		t.Fatal(err)
 	}
+	var steadystate bool
 	defer file.Close()
 	Reader := bufio.NewReader(file)
 	for {
@@ -21,7 +23,14 @@ func TestSensorParsing(t *testing.T){
 	}
 	sensordata, new := ParseAdditionalData(data)
 	if new {
-		t.Log(sensordata)
+		Buffer.Add(sensordata.temp)
+		if(Buffer.SlopeChange()){
+			if(Buffer.Average() > 80 || steadystate){
+			steadystate = true
+			t.Log(Buffer.Average())
+			t.Log(Buffer.SampleNumber())
+			}
+		}
 	}
 	}
 }
