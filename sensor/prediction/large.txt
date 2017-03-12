@@ -1,0 +1,19 @@
+	sensor_test.go:30: 83.13699999999999
+	sensor_test.go:31: 348
+	sensor_test.go:30: 68.97
+	sensor_test.go:31: 369
+	sensor_test.go:30: 83.85399999999998
+	sensor_test.go:31: 385
+	sensor_test.go:30: 69.39399999999998
+	sensor_test.go:31: 404
+	sensor_test.go:30: 82.44399999999999
+	sensor_test.go:31: 426
+	sensor_test.go:30: 70.44899999999998
+	sensor_test.go:31: 447
+	sensor_test.go:30: 81.98100000000001
+	sensor_test.go:31: 467
+	sensor_test.go:30: 69.654
+	sensor_test.go:31: 493
+	sensor_test.go:30: 70.60900000000001
+	sensor_test.go:31: 501
+
