@@ -5,6 +5,7 @@ import (
 	"strconv"
 	"strings"
 	"time"
+	"encoding/hex"
 )
 
 var CurrentData dataStack
@@ -17,8 +18,8 @@ type DryerCycle struct {
 	Data []SensorData
 }
 
-func NewDryerCycle() {
-	data := make([]Sensordata, 1, 1)
+func NewDryerCycle()DryerCycle{
+	data := make([]SensorData, 1, 1)
 	return DryerCycle{data}
 }
 
@@ -57,13 +58,25 @@ func ParseSensor(sensordata string) SensorData {
 	sensordata = strings.Replace(sensordata, ";", "", -1)
 	splitdata := strings.Split(sensordata, ",")
 	fmt.Println(sensordata)
-	s.accelx, _ = strconv.ParseFloat(splitdata[0], 64)
-	s.accely, _ = strconv.ParseFloat(splitdata[1], 64)
-	s.accelz, _ = strconv.ParseFloat(splitdata[2], 64)
-	twopoints := strings.Split(splitdata[3], "C")
+	//s.accelx, _ = strconv.ParseFloat(splitdata[0], 64)
+	//s.accely, _ = strconv.ParseFloat(splitdata[1], 64)
+	//s.accelz, _ = strconv.ParseFloat(splitdata[2], 64)
+	twopoints := strings.Split(splitdata[0], "C")
 	fmt.Println(twopoints)
 	s.temp, _ = strconv.ParseFloat(twopoints[0], 64)
 	s.humidity, _ = strconv.ParseFloat(twopoints[1], 64)
 	s.timing = time.Now()
 	return s
+}
+
+func TrimNonsense(s string)string{
+	s = strings.Replace(s, "Notification handle = 0x0012 value: ","",-1)
+	s = strings.Replace(s, " ", "",-1)
+	s = strings.Replace(s, "\n", "",-1)
+	fmt.Println(s)
+	newstring,err := hex.DecodeString(s)
+	if err != nil{
+		fmt.Println(err)
+	}	
+	return string(newstring)
 }

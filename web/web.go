@@ -18,7 +18,7 @@ import (
 func PostPoint(s sensor.SensorData, tag string) string {
 	url := "http://ec2-52-23-227-218.compute-1.amazonaws.com:8000/data/?access_data_key=%242b%2412%24l24KcoFv0wVZvmuAoraEcOFJ4EWDRDv6hq.6f8qSGypj2wuyuIMR."
 	//url = "http://httpbin.org/post"
-	payload := []byte("{\"tag\": \"" + tag + "\", \"temperature\" : " + fmt.Sprint(s.Temp()) + ", \"humidity\" : " + fmt.Sprint(s.Humidity()) + " , \"orientation\" : \"0 0 0\"}")
+	payload := []byte("{\"tag\": \"" + tag + "\", \"temperature\" : " + fmt.Sprint(s.Temp()) + ", \"humidity\" : " + fmt.Sprint(s.Humidity()) + " , \"orientation\" : \"0 0 0\" ,\"time\" : \""+fmt.Sprint(time.Now().Unix())+"\" }")
 	fmt.Println(payload)
 	req, err := http.NewRequest("POST", url, bytes.NewBuffer([]byte(payload)))
 	//req.Header.Set("X-Custom-Header", "myvalue")

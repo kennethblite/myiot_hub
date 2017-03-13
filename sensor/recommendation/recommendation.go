@@ -1,7 +1,7 @@
 package recommendation
 
 import (
-	"sensor"
+	"myiot_hub/sensor"
 )
 
 var rec = map[string]string{
@@ -13,7 +13,7 @@ var rec = map[string]string{
 	"OVER DRY":      "You have overdried your clothes, please consider doing a larger load",
 }
 
-func Recommend(data []SensorData, steadystate int, maxtemp float64) string {
+func Recommend(data []sensor.SensorData, maxtemp float64) string {
 	if maxtemp > 90 {
 		return rec["LINT FILTER"]
 	}
@@ -34,5 +34,5 @@ func Recommend(data []SensorData, steadystate int, maxtemp float64) string {
 	if midhumid < 5 {
 		return rec["OVER DRY"]
 	}
-
+	return rec["PERFECT"]
 }
